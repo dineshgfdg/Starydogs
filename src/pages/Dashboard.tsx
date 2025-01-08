@@ -655,6 +655,16 @@ const DistrictProgressChart = ({ data }: { data: TopDistrict[] }) => {
   );
 };
 
+// Districts array
+const DISTRICTS = [
+  'Anantapur District', 'Annamayya District', 'Bapatla District', 'Chittoor District',
+  'East Godavari District', 'Eluru District', 'Guntur District', 'Kadapa District',
+  'Kakinada District', 'Konaseema District', 'Krishna District', 'Kurnool District',
+  'Nandyal District', 'Nellore District', 'NTR District', 'Srikakulam District',
+  'Vizianagaram District', 'Parvathipuram Manyam District', 'Visakhapatnam District',
+  'Anakapalli District', 'West Godavari District', 'Palnadu District', 'Prakasam District',
+  'Sri Sathya Sai District', 'Tirupati District'
+];
 
 const Dashboard = () => {
   const theme = useTheme();
@@ -688,7 +698,7 @@ const Dashboard = () => {
   ]);
 
   // Backend URL - Change this when integrating with your backend
-  const BACKEND_URL = 'https://your-backend-url.com/api';
+  const BACKEND_URL = 'https://dog-stray-backend-x7ik.onrender.com/api';
 
   // Function to update timeline data
   const updateTimelineData = () => {
@@ -727,23 +737,67 @@ const Dashboard = () => {
   // Function to fetch all dashboard data
   const fetchDashboardData = async () => {
     try {
-      // Uncomment and modify these when adding your backend
-      // const metricsResponse = await axios.get(`${BACKEND_URL}/dashboard-metrics`);
-      // const timelineResponse = await axios.get(`${BACKEND_URL}/timeline-data`);
-      // setMetrics(metricsResponse.data);
-      // setTimelineData(timelineResponse.data);
-      
-      // For now, using mock increments
-      setMetrics(prev => ({
-        totalULBs: prev.totalULBs + Math.floor(Math.random() * 2),
-        totalStrayDogs: prev.totalStrayDogs + Math.floor(Math.random() * 10),
-        sterilizedDogs: prev.sterilizedDogs + Math.floor(Math.random() * 5),
-        pendingDogs: prev.pendingDogs + Math.floor(Math.random() * 3),
-        releasedDogs: prev.releasedDogs + Math.floor(Math.random() * 4)
-      }));
-      
-      // Update timeline data
-      updateTimelineData();
+      const response = await axios.get(`${BACKEND_URL}/getAllDogs`);
+      const dogs = response.data.dogs;
+
+      // Calculate district-wise statistics
+      const districtStats = DISTRICTS.map(districtName => {
+        const districtDogs = dogs.filter((dog: Dog) => dog.district === districtName);
+        const total = districtDogs.length;
+        const completed = districtDogs.filter((dog: Dog) => dog.surgery_date !== null).length;
+        
+        return {
+          name: districtName,
+          total: total,
+          completed: completed,
+          progressPercentage: total > 0 ? Number(((completed / total) * 100).toFixed(1)) : 0
+        };
+      }).filter((district: TopDistrict) => district.total > 0)  // Only include districts with dogs
+       .sort((a: TopDistrict, b: TopDistrict) => b.total - a.total);      // Sort by total dogs descending
+
+      // Update topDistricts state
+      setTopDistricts(districtStats);
+
+      // Calculate metrics from the dogs data
+      const totalDogs = dogs.length;
+      const sterilizedDogs = dogs.filter((dog: Dog) => dog.surgery_date !== null).length;
+      const releasedDogs = dogs.filter((dog: Dog) => dog.relocation_date !== null).length;
+      const pendingDogs = totalDogs - sterilizedDogs;
+
+      // Get unique ULBs count
+      const uniqueULBs = new Set(dogs.map((dog: Dog) => dog.ulb)).size;
+
+      setMetrics({
+        totalULBs: uniqueULBs,
+        totalStrayDogs: totalDogs,
+        sterilizedDogs: sterilizedDogs,
+        pendingDogs: pendingDogs,
+        releasedDogs: releasedDogs
+      });
+
+      // Update timeline data based on caught dates
+      const last7Days = [...Array(7)].map((_, i) => {
+        const date = new Date();
+        date.setDate(date.getDate() - (6 - i));
+        const dateStr = `${String(date.getDate()).padStart(2, '0')}-${String(date.getMonth() + 1).padStart(2, '0')}`;
+        
+        const dayDogs = dogs.filter((dog: Dog) => {
+          const dogDate = new Date(dog.date_of_caught);
+          return dogDate.getDate() === date.getDate() &&
+                 dogDate.getMonth() === date.getMonth() &&
+                 dogDate.getFullYear() === date.getFullYear();
+        });
+
+        return {
+          date: dateStr,
+          registered: dayDogs.length,
+          sterilized: dayDogs.filter((dog: Dog) => dog.surgery_date !== null).length,
+          released: dayDogs.filter((dog: Dog) => dog.relocation_date !== null).length
+        };
+      });
+
+      setTimelineData(last7Days);
+
     } catch (error) {
       console.error('Error fetching dashboard data:', error);
     }
@@ -782,7 +836,7 @@ const Dashboard = () => {
 
   // Calculate statistics
   const totalDogs = dogs.length;
-  const sterilizedDogs = dogs.filter(dog => dog.surgery_date !== null).length;
+  const sterilizedDogs = dogs.filter((dog: Dog) => dog.surgery_date !== null).length;
   const remainingDogs = totalDogs - sterilizedDogs;
   const overallProgress = ((sterilizedDogs / totalDogs) * 100).toFixed(1);
 
@@ -858,159 +912,8 @@ const Dashboard = () => {
     }
   ];
 
-  // Update the top districts data with all districts
-  const topDistricts: TopDistrict[] = [
-    {
-      name: 'Visakhapatnam District',
-      total: 5670,
-      completed: 3890,
-      progressPercentage: 68.6
-    },
-    {
-      name: 'Guntur District',
-      total: 4890,
-      completed: 3234,
-      progressPercentage: 66.1
-    },
-    {
-      name: 'Krishna District',
-      total: 4123,
-      completed: 2890,
-      progressPercentage: 70.1
-    },
-    {
-      name: 'East Godavari District',
-      total: 4567,
-      completed: 3123,
-      progressPercentage: 68.4
-    },
-    {
-      name: 'West Godavari District',
-      total: 3890,
-      completed: 2567,
-      progressPercentage: 66.0
-    },
-    {
-      name: 'Chittoor District',
-      total: 3890,
-      completed: 2678,
-      progressPercentage: 68.8
-    },
-    {
-      name: 'Prakasam District',
-      total: 3567,
-      completed: 2345,
-      progressPercentage: 65.7
-    },
-    {
-      name: 'Nellore District',
-      total: 3234,
-      completed: 2123,
-      progressPercentage: 65.6
-    },
-    {
-      name: 'Kurnool District',
-      total: 3789,
-      completed: 2567,
-      progressPercentage: 67.7
-    },
-    {
-      name: 'Kadapa District',
-      total: 2890,
-      completed: 1945,
-      progressPercentage: 67.3
-    },
-    {
-      name: 'Anantapur District',
-      total: 3456,
-      completed: 2345,
-      progressPercentage: 67.9
-    },
-    {
-      name: 'Annamayya District',
-      total: 2890,
-      completed: 1945,
-      progressPercentage: 67.3
-    },
-    {
-      name: 'Bapatla District',
-      total: 2567,
-      completed: 1678,
-      progressPercentage: 65.4
-    },
-    {
-      name: 'Eluru District',
-      total: 3012,
-      completed: 2145,
-      progressPercentage: 71.2
-    },
-    {
-      name: 'Kakinada District',
-      total: 2789,
-      completed: 1945,
-      progressPercentage: 69.7
-    },
-    {
-      name: 'Konaseema District',
-      total: 2456,
-      completed: 1678,
-      progressPercentage: 68.3
-    },
-    {
-      name: 'Nandyal District',
-      total: 2345,
-      completed: 1678,
-      progressPercentage: 71.6
-    },
-    {
-      name: 'NTR District',
-      total: 3345,
-      completed: 2290,
-      progressPercentage: 68.5
-    },
-    {
-      name: 'Srikakulam District',
-      total: 3245,
-      completed: 2156,
-      progressPercentage: 66.4
-    },
-    {
-      name: 'Vizianagaram District',
-      total: 2890,
-      completed: 1945,
-      progressPercentage: 67.3
-    },
-    {
-      name: 'Parvathipuram Manyam District',
-      total: 2234,
-      completed: 1567,
-      progressPercentage: 70.1
-    },
-    {
-      name: 'Anakapalli District',
-      total: 2567,
-      completed: 1789,
-      progressPercentage: 69.7
-    },
-    {
-      name: 'Palnadu District',
-      total: 2456,
-      completed: 1678,
-      progressPercentage: 68.3
-    },
-    {
-      name: 'Sri Sathya Sai District',
-      total: 2123,
-      completed: 1456,
-      progressPercentage: 68.6
-    },
-    {
-      name: 'Tirupati District',
-      total: 2678,
-      completed: 1890,
-      progressPercentage: 70.6
-    }
-  ];
+  // Add state for top districts
+  const [topDistricts, setTopDistricts] = useState<TopDistrict[]>([]);
 
   // Expanded district sample data with more comprehensive information
   const districtSampleData = [
@@ -1360,12 +1263,22 @@ const Dashboard = () => {
       description: 'Helping stray dogs find better lives'
     },
     {
+      image: '/assets/DogCatch.jpeg',
+      title: 'Catching stray dogs',
+      description: 'Humane capture and handling of stray dogs'
+    },
+    {
+      image: '/assets/Feeding.jpeg',
+      title: 'Post-Surgery Care',
+      description: 'Proper feeding and care during recovery'
+    },
+    {
       image: '/assets/SterilizedDogs.jpeg',
       title: 'Sterilization Program',
       description: 'Animal Birth Control (ABC) Program'
     },
     {
-      image: '/assets/ReleasedDogs.jpg',
+      image: '/assets/ReleasedDogs.jpeg',
       title: 'Released Dogs',
       description: 'Successfully rehabilitated and released'
     }
@@ -1565,8 +1478,8 @@ const Dashboard = () => {
         <Grid item xs={12} md={4}>
           <MetricCard
             title="Dogs Registered"
-            value={9801}
-            total={19770}
+            value={metrics.totalStrayDogs}
+            total={10000}
             subtitle="Total Registered vs Target"
             color={DASHBOARD_COLORS.gates}
           />
@@ -1574,8 +1487,8 @@ const Dashboard = () => {
         <Grid item xs={12} md={4}>
           <MetricCard
             title="Sterilization"
-            value={20230}
-            total={37381}
+            value={metrics.sterilizedDogs}
+            total={metrics.totalStrayDogs}
             subtitle="Total Sterilized vs Total Dogs"
             color={DASHBOARD_COLORS.attendance}
           />
@@ -2064,21 +1977,21 @@ const Dashboard = () => {
                 data={[
                   { 
                     name: 'Pending', 
-                    value: 5119,
+                    value: metrics.pendingDogs,
                     color: '#E74C3C',
-                    percentage: '33.6%'
+                    percentage: `${((metrics.pendingDogs / metrics.totalStrayDogs) * 100).toFixed(1)}%`
                   },
                   { 
-                    name: 'Sterilized', 
-                    value: 4038,
+                    name: 'Sterilized Only', 
+                    value: Math.max(0, metrics.sterilizedDogs - metrics.releasedDogs),
                     color: '#F39C12',
-                    percentage: '26.5%'
+                    percentage: `${Math.max(0, ((metrics.sterilizedDogs - metrics.releasedDogs) / metrics.totalStrayDogs) * 100).toFixed(1)}%`
                   },
                   { 
                     name: 'Released', 
-                    value: 6060,
+                    value: Math.min(metrics.releasedDogs, metrics.sterilizedDogs),
                     color: '#27AE60',
-                    percentage: '39.8%'
+                    percentage: `${((Math.min(metrics.releasedDogs, metrics.sterilizedDogs) / metrics.totalStrayDogs) * 100).toFixed(1)}%`
                   }
                 ]} 
                 title="Dog Population Status Distribution" 
