@@ -46,7 +46,7 @@ const Login = () => {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        background: `url('./assets/abc123.png')`,
+        background: `url('./assets/abc123.jpg')`,
         backgroundSize: { xs: '200%', sm: 'cover' },
         backgroundPosition: { 
           xs: 'center 20%',
@@ -73,7 +73,7 @@ const Login = () => {
             left: 0,
             right: 0,
             bottom: 0,
-            background: `url('./assets/abc123.png')`,
+            background: `url('./assets/abc123.jpg')`,
             backgroundSize: 'cover',
             backgroundPosition: 'center',
             '&::before': {

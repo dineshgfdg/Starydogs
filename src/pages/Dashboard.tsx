@@ -1272,13 +1272,13 @@ const Dashboard = () => {
   const carouselItems = [
     {
       image: '/assets/Starydog.jpeg',
-      title: 'Stray Dogs',
-      description: 'Helping stray dogs find better lives'
+      title: 'PREVENT RABIES ',
+      description: 'STERILISE & VACCINATE'
     },
     {
       image: '/assets/DogCatch.jpeg',
-      title: 'Catching stray dogs',
-      description: 'Humane capture and handling of stray dogs'
+      title: 'Catching of Stray Dogs by Humane Methods',
+      description: ''
     },
     {
       image: '/assets/Feeding.jpeg',
@@ -1287,13 +1287,13 @@ const Dashboard = () => {
     },
     {
       image: '/assets/SterilizedDogs.jpeg',
-      title: 'Sterilization Program',
-      description: 'Animal Birth Control (ABC) Program'
+      title: 'Conducting Surgeries as per SOP',
+      description: ''
     },
     {
       image: '/assets/Res.jpeg',
-      title: 'Released Dogs',
-      description: 'All the sterilised dogs will be released back into their original territory after Anti Rabies Vaccine'
+      title: 'Sterilised Dogs will be released back into their original territory after Anti Rabies Vaccination',
+      description: ''
     }
   ];
 
