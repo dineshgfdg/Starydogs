@@ -66,6 +66,8 @@ interface Dog {
   gender: string;
   date_of_caught: string;
   surgery_date: string | null;
+  relocation_image:string;
+  after_surgery_image:string;
   relocation_date: string | null;
   status: string;
 }
@@ -760,8 +762,8 @@ const Dashboard = () => {
 
       // Calculate metrics from the dogs data
       const totalDogs = dogs.length;
-      const sterilizedDogs = dogs.filter((dog: Dog) => dog.surgery_date !== null).length;
-      const releasedDogs = dogs.filter((dog: Dog) => dog.relocation_date !== null).length;
+      const sterilizedDogs = dogs.filter((dog: Dog) => dog.after_surgery_image !== "").length;
+      const releasedDogs = dogs.filter((dog: Dog) => dog.after_surgery_image !== "" && dog.relocation_image !== "").length;
       const pendingDogs = totalDogs - sterilizedDogs;
 
       // Get unique ULBs count
