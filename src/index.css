@@ -1,0 +1,70 @@
+body {
+  margin: 0;
+  font-family: Helvetica, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: Helvetica, sans-serif;
+}
+
+/* Print Styles */
+@media print {
+  body * {
+    visibility: hidden;
+  }
+
+  #printable-content, 
+  #printable-content * {
+    visibility: visible;
+  }
+
+  #printable-content {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    overflow: visible !important;
+    page-break-inside: avoid;
+  }
+
+  /* Ensure images are visible and sized appropriately */
+  #printable-content img {
+    max-width: 100%;
+    max-height: 300px;
+    object-fit: contain;
+  }
+
+  /* Hide unnecessary elements */
+  .MuiTablePagination-root,
+  .export-section,
+  .MuiMenu-root {
+    display: none !important;
+  }
+
+  /* Improve typography for print */
+  #printable-content h4, 
+  #printable-content h6 {
+    font-size: 16pt !important;
+    margin-bottom: 10px;
+  }
+
+  /* Ensure tables break correctly */
+  #printable-content table {
+    width: 100%;
+    border-collapse: collapse;
+    page-break-inside: auto;
+  }
+
+  #printable-content tr {
+    page-break-inside: avoid;
+    page-break-after: auto;
+  }
+}
+
+.leaflet-container {
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
