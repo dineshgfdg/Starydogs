@@ -1291,9 +1291,14 @@ const Dashboard = () => {
       description: 'Animal Birth Control (ABC) Program'
     },
     {
+      image: '/assets/Res.jpeg',
+      title: 'Post operative Care',
+      description: 'Post operative care of sterilised dogs'
+    },
+    {
       image: '/assets/ReleasedDogs.jpeg',
       title: 'Released Dogs',
-      description: 'Successfully rehabilitated and released'
+      description: 'Successfully relocation of sterilised dogs after anti rabies vaccine'
     }
   ];
 
@@ -1375,10 +1380,10 @@ const Dashboard = () => {
   </Box>
       <Grid container spacing={3}>
         {/* Summary Metric Cards */}
-        <Grid item xs={12} md={3}>
+        <Grid item xs={12} md={2}>
           <Box
             sx={{
-              background: `linear-gradient(rgb(169 156 152 / 85%), rgb(0 0 0 / 85%)), url('/assets/ULB.jpg')`,
+              background: `linear-gradient(rgba(25, 118, 210, 0.6), rgba(13, 71, 161, 0.7)), url('/assets/ULB.jpg')`,
               backgroundSize: 'cover',
               backgroundPosition: 'center',
               borderRadius: 2,
@@ -1403,10 +1408,10 @@ const Dashboard = () => {
            
           </Box>
         </Grid>
-        <Grid item xs={12} md={3}>
+        <Grid item xs={12} md={2}>
           <Box
             sx={{
-              background:  `linear-gradient(rgb(169 156 152 / 85%), rgb(0 0 0 / 85%)), url('/assets/Starydog.jpeg')`,
+              background: `linear-gradient(rgba(76, 175, 80, 0.6), rgba(27, 94, 32, 0.7)), url('/assets/Starydog.jpeg')`,
               backgroundSize: 'cover',
               backgroundPosition: 'center',
               borderRadius: 2,
@@ -1423,45 +1428,17 @@ const Dashboard = () => {
             }}
           >
             <Typography variant="h2" sx={{ color: 'white', fontWeight: 'bold', mb: 1, fontSize: '2.5rem', lineHeight: 1 }}>
-              {metrics.totalStrayDogs.toLocaleString()}
+              {204121}
             </Typography>
             <Typography variant="subtitle1" sx={{ color: 'white', opacity: 0.9, mt: 2 }}>
-              Total Stray Dogs
+             Target Dog Population
             </Typography>
           </Box>
         </Grid>
-        <Grid item xs={12} md={3}>
+        <Grid item xs={12} md={2}>
           <Box
             sx={{
-              background: `linear-gradient(rgb(169 156 152 / 85%), rgb(0 0 0 / 85%)), url('/assets/SterilizedDogs.jpg')`,
-              backgroundSize: 'cover',
-              backgroundPosition: 'center',
-              borderRadius: 2,
-              p: 3,
-              textAlign: 'left',
-              boxShadow: '0 2px 4px rgba(255, 179, 0, 0.2)',
-              position: 'relative',
-              overflow: 'hidden',
-              '&:hover': {
-                '& .emoji': {
-                  transform: 'scale(1.15)'
-                }
-              }
-            }}
-          >
-            <Typography variant="h2" sx={{ color: 'white', fontWeight: 'bold', mb: 1, fontSize: '2.5rem', lineHeight: 1 }}>
-              {metrics.sterilizedDogs.toLocaleString()}
-            </Typography>
-            <Typography variant="subtitle1" sx={{ color: 'white', opacity: 0.9, mt: 2 }}>
-              Sterilized Dogs
-            </Typography>
-           
-          </Box>
-        </Grid>
-        <Grid item xs={12} md={3}>
-          <Box
-            sx={{
-              background: `linear-gradient(rgb(169 156 152 / 85%), rgb(0 0 0 / 85%)), url('/assets/ReleasedDogs.jpg')`,
+              background: `linear-gradient(rgba(255, 152, 0, 0.6), rgba(230, 81, 0, 0.7)), url('/assets/DogCatch.jpeg')`,
               backgroundSize: 'cover',
               backgroundPosition: 'center',
               borderRadius: 2,
@@ -1478,21 +1455,105 @@ const Dashboard = () => {
             }}
           >
             <Typography variant="h2" sx={{ color: 'white', fontWeight: 'bold', mb: 1, fontSize: '2.5rem', lineHeight: 1 }}>
-              {metrics.releasedDogs.toLocaleString()}
+              {34717}
             </Typography>
             <Typography variant="subtitle1" sx={{ color: 'white', opacity: 0.9, mt: 2 }}>
-              Released Dogs
+             No.of Dogs caught 
             </Typography>
            
           </Box>
         </Grid>
-
+        <Grid item xs={12} md={2}>
+          <Box
+            sx={{
+              background: `linear-gradient(rgba(156, 39, 176, 0.6), rgba(74, 20, 140, 0.7)), url('/assets/SterilizedDogs.jpeg')`,
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+              borderRadius: 2,
+              p: 3,
+              textAlign: 'left',
+              boxShadow: '0 2px 4px rgba(255, 179, 0, 0.2)',
+              position: 'relative',
+              overflow: 'hidden',
+              '&:hover': {
+                '& .emoji': {
+                  transform: 'scale(1.15)'
+                }
+              }
+            }}
+          >
+            <Typography variant="h2" sx={{ color: 'white', fontWeight: 'bold', mb: 1, fontSize: '2.5rem', lineHeight: 1 }}>
+              {34717}
+            </Typography>
+            <Typography variant="subtitle1" sx={{ color: 'white', opacity: 0.9, mt: 2 }}>
+             No.of Dogs Sterilised
+            </Typography>
+           
+          </Box>
+        </Grid>
+       
+        <Grid item xs={12} md={2}>
+          <Box
+            sx={{
+              background: `linear-gradient(rgba(0, 150, 136, 0.6), rgba(0, 77, 64, 0.7)), url('/assets/ReleasedDogs.jpeg')`,
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+              borderRadius: 2,
+              p: 3,
+              textAlign: 'left',
+              boxShadow: '0 2px 4px rgba(67, 160, 71, 0.2)',
+              position: 'relative',
+              overflow: 'hidden',
+              '&:hover': {
+                '& .emoji': {
+                  transform: 'scale(1.15)'
+                }
+              }
+            }}
+          >
+            <Typography variant="h2" sx={{ color: 'white', fontWeight: 'bold', mb: 1, fontSize: '2.5rem', lineHeight: 1 }}>
+              {34717}
+            </Typography>
+            <Typography variant="subtitle1" sx={{ color: 'white', opacity: 0.9, mt: 2 }}>
+             No.of Dogs Releaed after ARV
+            </Typography>
+           
+          </Box>
+        </Grid>
+        <Grid item xs={12} md={2}>
+          <Box
+            sx={{
+              background: `linear-gradient(rgba(233, 30, 99, 0.6), rgba(136, 14, 79, 0.7)), url('/assets/Res.jpeg')`,
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+              borderRadius: 2,
+              p: 3,
+              textAlign: 'left',
+              boxShadow: '0 2px 4px rgba(67, 160, 71, 0.2)',
+              position: 'relative',
+              overflow: 'hidden',
+              '&:hover': {
+                '& .emoji': {
+                  transform: 'scale(1.15)'
+                }
+              }
+            }}
+          >
+            <Typography variant="h2" sx={{ color: 'white', fontWeight: 'bold', mb: 1, fontSize: '2.5rem', lineHeight: 1 }}>
+              {169404}
+            </Typography>
+            <Typography variant="subtitle1" sx={{ color: 'white', opacity: 0.9, mt: 2 }}>
+              Balance to be covered
+            </Typography>
+           
+          </Box>
+        </Grid>
         {/* Metric Cards */}
         <Grid item xs={12} md={4}>
           <MetricCard
             title="Dogs Registered"
-            value={metrics.totalStrayDogs}
-            total={10000}
+            value={34717}
+            total={204121}
             subtitle="Total Registered vs Target"
             color={DASHBOARD_COLORS.gates}
           />
@@ -1500,8 +1561,8 @@ const Dashboard = () => {
         <Grid item xs={12} md={4}>
           <MetricCard
             title="Sterilization"
-            value={metrics.sterilizedDogs}
-            total={metrics.totalStrayDogs}
+            value={34717}
+            total={34717}
             subtitle="Total Sterilized vs Total Dogs"
             color={DASHBOARD_COLORS.attendance}
           />
@@ -1509,8 +1570,8 @@ const Dashboard = () => {
         <Grid item xs={12} md={4}>
           <MetricCard
             title="Released Dogs"
-            value={metrics.releasedDogs}
-            total={metrics.sterilizedDogs}
+            value={34717}
+            total={34717}
             subtitle="Released vs Sterilized Dogs"
             color="#4CAF50"
           />
