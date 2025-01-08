@@ -1282,8 +1282,8 @@ const Dashboard = () => {
     },
     {
       image: '/assets/Feeding.jpeg',
-      title: 'Post-Surgery Care',
-      description: 'Proper feeding and care during recovery'
+      title: 'Post operative Care',
+      description: 'Post operative care of sterilised dogs'
     },
     {
       image: '/assets/SterilizedDogs.jpeg',
@@ -1292,13 +1292,8 @@ const Dashboard = () => {
     },
     {
       image: '/assets/Res.png',
-      title: 'Post operative Care',
-      description: 'Post operative care of sterilised dogs'
-    },
-    {
-      image: '/assets/ReleasedDogs.jpeg',
       title: 'Released Dogs',
-      description: 'Successfully relocation of sterilised dogs after anti rabies vaccine'
+      description: 'All the sterilised dogs will be released back into their original territory after Anti Rabies Vaccine'
     }
   ];
 
