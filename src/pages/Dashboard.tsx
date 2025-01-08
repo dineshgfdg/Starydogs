@@ -90,6 +90,10 @@ interface TopDistrict {
   name: string;
   total: number;
   completed: number;
+  released: number;
+  maleCount: number;
+  femaleCount: number;
+  pendingCount: number;
   progressPercentage: number;
 }
 
@@ -746,12 +750,19 @@ const Dashboard = () => {
       const districtStats = DISTRICTS.map(districtName => {
         const districtDogs = dogs.filter((dog: Dog) => dog.district === districtName);
         const total = districtDogs.length;
-        const completed = districtDogs.filter((dog: Dog) => dog.surgery_date !== null).length;
+        const completed = districtDogs.filter((dog: Dog) => dog.after_surgery_image !== "").length;
+        const released = districtDogs.filter((dog: Dog) => dog.after_surgery_image !== "" && dog.relocation_image !== "").length;
+        const maleCount = districtDogs.filter((dog: Dog) => dog.gender === "Male").length;
+        const femaleCount = districtDogs.filter((dog: Dog) => dog.gender === "Female").length;
         
         return {
           name: districtName,
           total: total,
           completed: completed,
+          released: released,
+          maleCount: maleCount,
+          femaleCount: femaleCount,
+          pendingCount: total - completed,
           progressPercentage: total > 0 ? Number(((completed / total) * 100).toFixed(1)) : 0
         };
       }).filter((district: TopDistrict) => district.total > 0)  // Only include districts with dogs
@@ -2069,59 +2080,59 @@ const Dashboard = () => {
                       </TableRow>
                     </TableHead>
                     <TableBody>
-                      {topDistricts.map((district, index) => {
-                        const districtDetails = districtSampleData.find(d => d.name.includes(district.name));
-                        
-                        return (
-                          <StyledTableRow key={district.name}>
-                            <StyledTableCell sx={{ fontSize: '0.75rem', py: 1 }}>
-                              <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                                <Box 
-                                  sx={{ 
-                                    width: 8, 
-                                    height: 8, 
-                                    borderRadius: '50%', 
-                                    backgroundColor: DASHBOARD_COLORS.chartColors[index % DASHBOARD_COLORS.chartColors.length],
-                                    mr: 1 
-                                  }} 
-                                />
-                                {district.name.replace(' District', '')}
-                              </Box>
-                            </StyledTableCell>
-                            <StyledTableCell align="center" sx={{ fontSize: '0.75rem', py: 1 }}>{district.total}</StyledTableCell>
-                            <StyledTableCell align="center" sx={{ fontSize: '0.75rem', py: 1 }}>
-                              {districtDetails ? districtDetails.maleCount : 'N/A'}
-                            </StyledTableCell>
-                            <StyledTableCell align="center" sx={{ fontSize: '0.75rem', py: 1 }}>
-                              {districtDetails ? districtDetails.femaleCount : 'N/A'}
-                            </StyledTableCell>
-                            <StyledTableCell align="center" sx={{ fontSize: '0.75rem', py: 1 }}>{district.completed}</StyledTableCell>
-                            <StyledTableCell align="center" sx={{ fontSize: '0.75rem', py: 1 }}>
-                              {districtDetails ? districtDetails.released : 'N/A'}
-                            </StyledTableCell>
-                            <StyledTableCell align="center" sx={{ fontSize: '0.75rem', py: 1 }}>
-                              <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                                <Typography 
-                                  variant="body2" 
-                                  sx={{ 
-                                    color: district.progressPercentage > 50 ? 'success.main' : 'error.main',
-                                    fontWeight: 'bold',
-                                    fontSize: '0.75rem',
-                                    mr: 0.5
-                                  }}
-                                >
-                                  {district.progressPercentage}%
-                                </Typography>
-                                {district.progressPercentage > 50 ? (
-                                  <KeyboardArrowUpIcon sx={{ fontSize: '1rem' }} color="success" />
-                                ) : (
-                                  <KeyboardArrowDownIcon sx={{ fontSize: '1rem' }} color="error" />
-                                )}
-                              </Box>
-                            </StyledTableCell>
-                          </StyledTableRow>
-                        );
-                      })}
+                      {topDistricts.map((district, index) => (
+                        <StyledTableRow key={district.name}>
+                          <StyledTableCell sx={{ fontSize: '0.75rem', py: 1 }}>
+                            <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                              <Box 
+                                sx={{ 
+                                  width: 8, 
+                                  height: 8, 
+                                  borderRadius: '50%', 
+                                  backgroundColor: DASHBOARD_COLORS.chartColors[index % DASHBOARD_COLORS.chartColors.length],
+                                  mr: 1 
+                                }} 
+                              />
+                              {district.name.replace(' District', '')}
+                            </Box>
+                          </StyledTableCell>
+                          <StyledTableCell align="center" sx={{ fontSize: '0.75rem', py: 1 }}>
+                            {district.total}
+                          </StyledTableCell>
+                          <StyledTableCell align="center" sx={{ fontSize: '0.75rem', py: 1 }}>
+                            {district.maleCount}
+                          </StyledTableCell>
+                          <StyledTableCell align="center" sx={{ fontSize: '0.75rem', py: 1 }}>
+                            {district.femaleCount}
+                          </StyledTableCell>
+                          <StyledTableCell align="center" sx={{ fontSize: '0.75rem', py: 1 }}>
+                            {district.completed}
+                          </StyledTableCell>
+                          <StyledTableCell align="center" sx={{ fontSize: '0.75rem', py: 1 }}>
+                            {district.released}
+                          </StyledTableCell>
+                          <StyledTableCell align="center" sx={{ fontSize: '0.75rem', py: 1 }}>
+                            <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                              <Typography 
+                                variant="body2" 
+                                sx={{ 
+                                  color: district.progressPercentage > 50 ? 'success.main' : 'error.main',
+                                  fontWeight: 'bold',
+                                  fontSize: '0.75rem',
+                                  mr: 0.5
+                                }}
+                              >
+                                {district.progressPercentage}%
+                              </Typography>
+                              {district.progressPercentage > 50 ? (
+                                <KeyboardArrowUpIcon sx={{ fontSize: '1rem' }} color="success" />
+                              ) : (
+                                <KeyboardArrowDownIcon sx={{ fontSize: '1rem' }} color="error" />
+                              )}
+                            </Box>
+                          </StyledTableCell>
+                        </StyledTableRow>
+                      ))}
                     </TableBody>
                   </Table>
                 </TableContainer>
