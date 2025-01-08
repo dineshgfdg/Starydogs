@@ -1397,7 +1397,13 @@ const Dashboard = () => {
             <Typography variant="h2" sx={{ color: 'white', fontWeight: 'bold', mb: 1, fontSize: '2.5rem', lineHeight: 1 }}>
               {123}
             </Typography>
-            <Typography variant="subtitle1" sx={{ color: 'white', opacity: 0.9, mt: 2 }}>
+            <Typography variant="subtitle1" sx={{ 
+              color: 'white', 
+              opacity: 0.9, 
+              mt: 2,
+              whiteSpace: 'nowrap',
+              fontSize: '0.9rem'
+            }}>
               Total ULBs
             </Typography>
            
@@ -1425,7 +1431,13 @@ const Dashboard = () => {
             <Typography variant="h2" sx={{ color: 'white', fontWeight: 'bold', mb: 1, fontSize: '2.5rem', lineHeight: 1 }}>
               {204121}
             </Typography>
-            <Typography variant="subtitle1" sx={{ color: 'white', opacity: 0.9, mt: 2 }}>
+            <Typography variant="subtitle1" sx={{ 
+              color: 'white', 
+              opacity: 0.9, 
+              mt: 2,
+              whiteSpace: 'nowrap',
+              fontSize: '0.9rem'
+            }}>
              Target Dog Population
             </Typography>
           </Box>
@@ -1452,7 +1464,13 @@ const Dashboard = () => {
             <Typography variant="h2" sx={{ color: 'white', fontWeight: 'bold', mb: 1, fontSize: '2.5rem', lineHeight: 1 }}>
               {34717}
             </Typography>
-            <Typography variant="subtitle1" sx={{ color: 'white', opacity: 0.9, mt: 2 }}>
+            <Typography variant="subtitle1" sx={{ 
+              color: 'white', 
+              opacity: 0.9, 
+              mt: 2,
+              whiteSpace: 'nowrap',
+              fontSize: '0.9rem'
+            }}>
              No.of Dogs caught 
             </Typography>
            
@@ -1480,7 +1498,13 @@ const Dashboard = () => {
             <Typography variant="h2" sx={{ color: 'white', fontWeight: 'bold', mb: 1, fontSize: '2.5rem', lineHeight: 1 }}>
               {34717}
             </Typography>
-            <Typography variant="subtitle1" sx={{ color: 'white', opacity: 0.9, mt: 2 }}>
+            <Typography variant="subtitle1" sx={{ 
+              color: 'white', 
+              opacity: 0.9, 
+              mt: 2,
+              whiteSpace: 'nowrap',
+              fontSize: '0.9rem'
+            }}>
              No.of Dogs Sterilised
             </Typography>
            
@@ -1509,8 +1533,14 @@ const Dashboard = () => {
             <Typography variant="h2" sx={{ color: 'white', fontWeight: 'bold', mb: 1, fontSize: '2.5rem', lineHeight: 1 }}>
               {34717}
             </Typography>
-            <Typography variant="subtitle1" sx={{ color: 'white', opacity: 0.9, mt: 2 }}>
-             No.of Dogs Releaed after ARV
+            <Typography variant="subtitle1" sx={{ 
+              color: 'white', 
+              opacity: 0.9, 
+              mt: 2,
+              whiteSpace: 'nowrap',
+              fontSize: '0.9rem'
+            }}>
+             No.of Dogs Released after ARV
             </Typography>
            
           </Box>
@@ -1537,7 +1567,13 @@ const Dashboard = () => {
             <Typography variant="h2" sx={{ color: 'white', fontWeight: 'bold', mb: 1, fontSize: '2.5rem', lineHeight: 1 }}>
               {169404}
             </Typography>
-            <Typography variant="subtitle1" sx={{ color: 'white', opacity: 0.9, mt: 2 }}>
+            <Typography variant="subtitle1" sx={{ 
+              color: 'white', 
+              opacity: 0.9, 
+              mt: 2,
+              whiteSpace: 'nowrap',
+              fontSize: '0.9rem'
+            }}>
               Balance to be covered
             </Typography>
            
