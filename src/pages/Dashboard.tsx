@@ -1360,7 +1360,7 @@ const Dashboard = () => {
       description: 'Helping stray dogs find better lives'
     },
     {
-      image: '/assets/SterilizedDogs.jpg',
+      image: '/assets/SterilizedDogs.jpeg',
       title: 'Sterilization Program',
       description: 'Animal Birth Control (ABC) Program'
     },
@@ -1410,7 +1410,7 @@ const Dashboard = () => {
             sx={{
               position: 'relative',
               width: '100%',
-              height: { xs: '200px', sm: '300px', md: '400px' }
+              height: { xs: '300px', sm: '400px', md: '500px' }
             }}
           >
             <Box
@@ -1422,8 +1422,6 @@ const Dashboard = () => {
                 width: '100%',
                 height: '100%',
                 objectFit: 'cover',
-                backgroundSize: 'cover',
-                backgroundPosition: 'center',
               }}
             />
             <Box
