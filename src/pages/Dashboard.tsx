@@ -1291,7 +1291,7 @@ const Dashboard = () => {
       description: 'Animal Birth Control (ABC) Program'
     },
     {
-      image: '/assets/Res.png',
+      image: '/assets/Res.jpeg',
       title: 'Released Dogs',
       description: 'All the sterilised dogs will be released back into their original territory after Anti Rabies Vaccine'
     }
