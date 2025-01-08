@@ -1382,7 +1382,7 @@ const Dashboard = () => {
             }}
           >
             <Typography variant="h2" sx={{ color: 'white', fontWeight: 'bold', mb: 1, fontSize: '2.5rem', lineHeight: 1 }}>
-              {metrics.totalULBs.toLocaleString()}
+              {123}
             </Typography>
             <Typography variant="subtitle1" sx={{ color: 'white', opacity: 0.9, mt: 2 }}>
               Total ULBs
