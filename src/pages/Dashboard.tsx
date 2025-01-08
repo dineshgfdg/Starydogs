@@ -1291,7 +1291,7 @@ const Dashboard = () => {
       description: 'Animal Birth Control (ABC) Program'
     },
     {
-      image: '/assets/Res.jpeg',
+      image: '/assets/Res.png',
       title: 'Post operative Care',
       description: 'Post operative care of sterilised dogs'
     },
@@ -1523,7 +1523,7 @@ const Dashboard = () => {
         <Grid item xs={12} md={2}>
           <Box
             sx={{
-              background: `linear-gradient(rgba(233, 30, 99, 0.6), rgba(136, 14, 79, 0.7)), url('/assets/Res.jpeg')`,
+              background: `linear-gradient(rgba(233, 30, 99, 0.6), rgba(136, 14, 79, 0.7)), url('/assets/Res.png')`,
               backgroundSize: 'cover',
               backgroundPosition: 'center',
               borderRadius: 2,
